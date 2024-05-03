@@ -1,0 +1,82 @@
+/* Define color variables */
+:root {
+    --background-color: #1a1a1a; /* Dark background for the overall app */
+    --text-color: #ffffff; /* White text for better readability on dark background */
+    --button-background: #ffcb2b; /* Firebase's characteristic orange for buttons */
+    --button-text: #000000; /* Dark text on the orange buttons */
+    --input-background: #333333; /* Slightly lighter dark gray for inputs */
+    --input-text: #ffffff; /* White text for input */
+    --messages-background: #242424; /* Dark gray for message area */
+    --messages-text: #f2f2f2; /* Very light gray for text in messages, softer than pure white */
+}
+
+/* Apply general body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Styling the header */
+h1 {
+    color: orange;
+}
+
+/* Styling the messages list */
+ul#messages {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 10px;
+    background: var(--messages-background);
+    padding: 10px;
+    border-radius: 5px;
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+ul#messages li {
+    padding: 8px 16px;
+    margin: 5px 0;
+    border-radius: 4px;
+    background-color: var(--input-background);
+    color: var(--messages-text);
+}
+
+/* Styling the form and inputs */
+form#form {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+}
+
+input[type="text"], input[type="submit"] {
+    padding: 10px;
+    margin: 5px;
+    flex-grow: 1;
+    border: none;
+    border-radius: 4px;
+}
+
+input[type="text"] {
+    flex-grow: 10;
+    background-color: var(--input-background);
+    color: var(--input-text);
+}
+
+input[type="submit"] {
+    /* flex-grow: 1; */
+    background-color: var(--button-background);
+    color: var(--button-text);
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: darken(var(--button-background), 10%);
+}

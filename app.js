@@ -1,24 +1,48 @@
 import express from "express";
-import { collection, doc, getDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore";
 
 import { db } from "./firebaseHandler.js";
 
+
+
 const app = express();
 
-app.get("/", async (req, res) => {
-  try {
-    const docRef = doc(db, "test", "test_document");
-    const docSnap = await getDoc(docRef);
+app.use(express.static("public"));
+app.use(express.json());
 
-    if (docSnap.exists()) {
-      console.log(docSnap.data());
-      res.send(docSnap.data());
-    } else {
-      console.log("No such document!");
-      res.status(404).send("Document not found");
-    }
+
+app.get('/', (req,res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+
+app.get("/api/getMessages", async (req, res) => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "messages"))
+    const docs = querySnapshot.docs.map(doc => doc.data());
+    // sort messages by timestamp
+    docs.sort((a, b) => a.timeStamp.localeCompare(b.timeStamp));
+    res.json(docs);
   } catch (err) {
     console.error(err);
+    res.status(500).send("Error reading data");
+  }
+});
+
+
+app.post("/api/sendMessage", async (req, res) => {
+  const { user, text } = req.body;
+  try {
+    const docRef = await addDoc(collection(db, "messages"), {
+      user,
+      text,
+      timeStamp: new Date().toISOString(),
+    });
+    console.log("Document written with ID: ", docRef.id);
+
+    res.status(200).send("Message successfully sent!");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error sending message");
   }
 });
 
