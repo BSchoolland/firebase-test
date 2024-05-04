@@ -2,6 +2,9 @@
 
 This is a simple chat application that uses Firebase's Firestore for real-time data syncing. 
 
+## Live site
+
+The project is hosted with github pages so you can easilly see what's going on! https://bschoolland.github.io/firebase-test/
 ## Features
 
 - Real-time chat: Messages are updated in real-time across all connected clients.
