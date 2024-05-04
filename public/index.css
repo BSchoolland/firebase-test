@@ -80,3 +80,11 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: darken(var(--button-background), 10%);
 }
+
+.description {
+    color: var(--text-color);
+    font-size: 0.8em;
+    margin: 5px 0;
+    width: 100%;
+    max-width: 600px;
+}

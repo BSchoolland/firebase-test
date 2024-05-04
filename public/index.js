@@ -2,10 +2,9 @@
 // Import the Firebase modules
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
 import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
-import { collection, query, onSnapshot, orderBy, limit, endBefore, doc } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
+import { collection, query, onSnapshot, orderBy, limit } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
 
-// Your web app's Firebase configuration
-
+// These are okay to expose since firebase is a client-side library
 const firebaseConfig = {
     apiKey: "AIzaSyAJtEmcLkZ6pjXWWHEdtUUqZs5t0oXqVco",
     authDomain: "simple-chat-app-96e48.firebaseapp.com",
@@ -86,7 +85,16 @@ function scrollToBottom() {
 // when the form is submitted, send the message to the server
 document.getElementById("form").addEventListener("submit", async (event) => {
     event.preventDefault();
-    const user = "anonymous";
+    const user = document.getElementById("username").value;
+    // make sure the user has entered a username
+    if (!user) {
+      alert("Please enter a username");
+      // focus the username field
+        document.getElementById("username").focus();
+      return;
+    }
+    // disable the username field after the user has sent a message
+    document.getElementById("username").disabled = true;
     const text = document.getElementById("input-text").value;
     const response = await fetch("/api/sendMessage", {
       method: "POST",

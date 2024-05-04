@@ -12,12 +12,21 @@
 </head>
 
 <body>
+    <!-- editable username box -->
+    <input type="text" id="username" placeholder="Enter your username" maxlength="20"/>
     <h1>Simple Chat App with Firebase's Firestore</h1>
     <ul id="messages"></ul>
     <form id="form" action="">
         <input type="text" id="input-text" autocomplete="off" />
         <input type="submit" value="Send" />
     </form>
+    <!-- description of theis project -->
+    <div class="description">
+        <p>This is a super simple project that uses Firebase's Firestore to create a chat app. Disclaimer: This is not a
+            secure chat app. Anyone with the link can read and write messages, and there is no user authentication. This is just a simple project made for the purpose of learning how to use Firestore.</p>
+            <p>Check out the code on <a target="_blank" rel="noopener noreferrer" href="https://github.com/BSchoolland/firebase-test">GitHub</a></p>
+        <p>Created by <a target="_blank" rel="noopener noreferrer" href="https://bschoolland.com">Ben Schoolland</a></p>
+    </div>
     <script src="index.js" type="module"></script>
 </body>
 
