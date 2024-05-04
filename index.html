@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple chat app</title>
     <link rel="stylesheet" href="index.css">
-    <script type="module">
-
-    </script>
+    <!-- favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -20,7 +19,7 @@
         <input type="text" id="input-text" autocomplete="off" />
         <input type="submit" value="Send" />
     </form>
-    <!-- description of theis project -->
+    <!-- description of the project -->
     <div class="description">
         <p>This is a super simple project that uses Firebase's Firestore to create a chat app. Disclaimer: This is not a
             secure chat app. Anyone with the link can read and write messages, and there is no user authentication. This
@@ -35,7 +34,7 @@
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
         import { getFirestore, collection, addDoc, query, onSnapshot, orderBy, limit } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
 
-        // These are okay to expose since firebase is a client-side library
+        // Firebase configuration (In a production app, I would want to think more about security)
         const firebaseConfig = {
             apiKey: "AIzaSyAJtEmcLkZ6pjXWWHEdtUUqZs5t0oXqVco",
             authDomain: "simple-chat-app-96e48.firebaseapp.com",
@@ -53,6 +52,7 @@
         let chunkSize = 10;
         let currentChunkSize = chunkSize;
 
+        // Get messages from Firestore
         const getMessages = () => {
             const q = query(collection(db, "messages"), orderBy("timeStamp", "desc"), limit(currentChunkSize));
 
@@ -64,12 +64,15 @@
                         const li = document.createElement("li");
                         li.textContent = change.doc.data().user + ": " + change.doc.data().text;
                         document.getElementById("messages").appendChild(li);
-                        scrollToBottom();
+                        // scroll to the bottom of the list
+                        var messages = document.getElementById("messages");
+                        messages.scrollTop = messages.scrollHeight;
                     }
                 });
             });
         }
 
+        // Get older messages from Firestore (a bit hacky, but it works!)
         const getOlderMessages = () => {
             if (allMessagesLoaded) {
                 return;
@@ -97,8 +100,6 @@
             });
         }
 
-        getMessages();
-
         // if the user scrolls to the top of the page, load more messages
         document.getElementById("messages").addEventListener("scroll", () => {
             if (document.getElementById("messages").scrollTop === 0) {
@@ -107,11 +108,6 @@
                 document.getElementById("messages").scrollTop = 5;
             }
         });
-
-        function scrollToBottom() {
-            var messages = document.getElementById("messages");
-            messages.scrollTop = messages.scrollHeight;
-        }
 
         // Send message to Firestore
         document.getElementById("form").addEventListener("submit", async (event) => {
@@ -136,6 +132,9 @@
                 console.error("Error sending message:", error);
             }
         });
+
+        // Get the messages!
+        getMessages();
     </script>
 </body>
 
