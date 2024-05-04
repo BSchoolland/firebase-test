@@ -22,10 +22,6 @@ This is a simple chat application that uses Firebase's Firestore for real-time d
 
 This is not a secure chat app. Anyone with the link can read and write messages, and there is no user authentication. This is just a simple project made for the purpose of learning how to use Firestore.
 
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
 ## License
 
 This project is licenced under the MIT licence.  [License](LICENSE)
