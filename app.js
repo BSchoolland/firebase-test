@@ -1,7 +1,7 @@
 import express from "express";
 import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore";
 
-import { db } from "./firebaseHandler.js";
+import { db } from "./backendFirebaseHandler.js";
 
 
 
