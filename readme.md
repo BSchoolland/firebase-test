@@ -28,4 +28,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+This project is licenced under the MIT licence.  [License](LICENSE.md)
