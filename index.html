@@ -125,7 +125,7 @@
                 await addDoc(collection(db, "messages"), {
                     user,
                     text,
-                    timeStamp: new Date()
+                    timeStamp: new Date().toISOString(),
                 });
                 document.getElementById("input-text").value = "";
             } catch (error) {
